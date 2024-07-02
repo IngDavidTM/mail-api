@@ -76,6 +76,12 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     erubi (1.13.0)
+    ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-arm-linux-gnu)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86-linux-gnu)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -128,6 +134,8 @@ GEM
     rack (2.2.9)
     rack-cors (2.0.0)
       rack (>= 2.0.0)
+    rack-proxy (0.7.7)
+      rack
     rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.8.4)
@@ -163,11 +171,35 @@ GEM
       psych (>= 4.0.0)
     reline (0.5.9)
       io-console (~> 0.5)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
+    semantic_range (3.0.0)
+    sprockets (4.2.1)
+      concurrent-ruby (~> 1.0)
+      rack (>= 2.2.4, < 4)
+    sprockets-rails (3.5.1)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      sprockets (>= 3.0.0)
     stringio (3.1.1)
     thor (1.3.1)
+    tilt (2.4.0)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    webpacker (5.4.4)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -188,7 +220,9 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.6)
+  sass-rails
   tzinfo-data
+  webpacker
 
 RUBY VERSION
    ruby 3.1.3p185
