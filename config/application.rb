@@ -8,7 +8,6 @@ Bundler.require(*Rails.groups)
 
 module MailApi
   class Application < Rails::Application
-    config.assets.enabled = true
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins 'your-frontend-domain.com'
