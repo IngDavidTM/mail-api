@@ -86,13 +86,19 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.delivery_method = :smtp
+
+  smtp_port = ENV.fetch('SMTP_PORT', 587).to_i
+  enable_starttls_auto = ActiveModel::Type::Boolean.new.cast(
+    ENV.fetch('SMTP_ENABLE_STARTTLS_AUTO', true)
+  )
+
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    domain: 'example.com',
-    user_name: ENV['EMAIL_USER_NAME'],
-    password: ENV['EMAIL_PASSWORD'],
-    authentication: 'plain',
-    enable_starttls_auto: true
+    address: ENV.fetch('SMTP_ADDRESS', 'smtp.gmail.com'),
+    port: smtp_port,
+    domain: ENV.fetch('SMTP_DOMAIN', 'gmail.com'),
+    user_name: ENV['SMTP_USERNAME'] || ENV['EMAIL_USER_NAME'],
+    password: ENV['SMTP_PASSWORD'] || ENV['EMAIL_PASSWORD'],
+    authentication: ENV.fetch('SMTP_AUTHENTICATION', 'plain'),
+    enable_starttls_auto: enable_starttls_auto
   }
 end

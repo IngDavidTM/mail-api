@@ -16,5 +16,7 @@ module MailApi
                  methods: %i[get post put patch delete options head]
       end
     end
+
+    config.middleware.use Rack::Attack
   end
 end

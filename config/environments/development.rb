@@ -55,14 +55,19 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  smtp_port = ENV.fetch('SMTP_PORT', 587).to_i
+  enable_starttls_auto = ActiveModel::Type::Boolean.new.cast(
+    ENV.fetch('SMTP_ENABLE_STARTTLS_AUTO', true)
+  )
+
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    domain: 'example.com',
-    user_name: 'david.tamayo1112@gmail.com',
-    password: 'glqt pifn ahct srsz',
-    authentication: 'plain',
-    enable_starttls_auto: true
+    address: ENV.fetch('SMTP_ADDRESS', 'smtp.gmail.com'),
+    port: smtp_port,
+    domain: ENV.fetch('SMTP_DOMAIN', 'gmail.com'),
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: ENV.fetch('SMTP_AUTHENTICATION', 'plain'),
+    enable_starttls_auto: enable_starttls_auto
   }
 
   # Raises error for missing translations.
