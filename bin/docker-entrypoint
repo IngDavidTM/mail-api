@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
-# Add any container initialization steps here
+if [ "$1" = "./bin/rails" ] && [ "$2" = "server" ]; then
+  shift 2
+  set -- ./bin/rails server -b 0.0.0.0 -p "${PORT:-3000}" "$@"
+fi
 
-exec "${@}"
+exec "$@"
