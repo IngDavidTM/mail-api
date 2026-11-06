@@ -1,14 +1,14 @@
 class UserMailer < ApplicationMailer
-  default from: 'david.tamayo1112@gmail.com'
+  OWNER = 'david.tamayo1112@gmail.com'.freeze
 
-  def welcome_email(email)
-    subject = 'Thank You for Reaching Out'
-    body = "Dear Recruiter,\n\nThank you for reaching out. I have received your email and will review it shortly. Looking forward to the opportunity to discuss further.\n\nBest regards,\nDavid Tamayo"
-    mail(to: email, subject: subject, body: body, content_type: 'text/plain')
-  end
+  default from: OWNER
 
-  def recruiter_email(name, email, message)
-    body_recruiter = "This is the message:\n\n#{message}\n\nBest regards,\n#{name} #{email}"
-    mail(to: 'david.tamayo1112@gmail.com', subject: 'Site Message', body: body_recruiter, content_type: 'text/plain')
+  # A message from the portfolio contact form, delivered only to the site owner.
+  # Reply-To is the visitor, so answering the email goes straight to them.
+  def contact_email(name, email, message)
+    body = "New message from the portfolio contact form.\n\n" \
+           "Name: #{name}\nEmail: #{email}\n\n#{message}\n"
+    mail(to: OWNER, reply_to: email, subject: "Portfolio message from #{name.truncate(60)}",
+         body: body, content_type: 'text/plain')
   end
 end
